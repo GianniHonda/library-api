@@ -22,7 +22,7 @@ public class Author {
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "birth_date", nullable = false)
+    @Column(name = "date_birth", nullable = false)
     private LocalDate dateBirthDate;
 
     @Column(name = "nationality", length = 50, nullable = false)
