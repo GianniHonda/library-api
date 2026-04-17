@@ -21,15 +21,39 @@ class BookRepositoryTest {
     AuthorRepository authorRepository;
 
     @Test
-    void saveTest(){
+    void saveAuthorAndBookTest(){
         Book book = new Book();
         book.setIsbn("9887-84874");
         book.setPrice(BigDecimal.valueOf(100));
         book.setGenre(BookGenre.FICTION);
-        book.setTitle("UFO");
+        book.setTitle("Third Book");
         book.setPublicationDate(LocalDate.of(1980, 1, 2));
 
-        Author author = authorRepository.findById(UUID.fromString("643b2962-82e0-47fb-a00a-b6436441c3ab")).orElse(null);
+        Author author = new Author();
+        author.setName("José");
+        author.setNationality("Brasilian");
+        author.setDateBirthDate(LocalDate.of(1951, 1, 31));
+
+        authorRepository.save(author);
+
+        book.setAuthor(author);
+
+        repository.save(book);
+    }
+
+    @Test
+    void saveCascadeTest(){
+        Book book = new Book();
+        book.setIsbn("9887-84874");
+        book.setPrice(BigDecimal.valueOf(100));
+        book.setGenre(BookGenre.FICTION);
+        book.setTitle("Other Book");
+        book.setPublicationDate(LocalDate.of(1980, 1, 2));
+
+        Author author = new Author();
+        author.setName("João");
+        author.setNationality("Brasilian");
+        author.setDateBirthDate(LocalDate.of(1951, 1, 31));
 
         book.setAuthor(author);
 
