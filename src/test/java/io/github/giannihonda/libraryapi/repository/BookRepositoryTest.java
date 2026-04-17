@@ -60,4 +60,30 @@ class BookRepositoryTest {
         repository.save(book);
     }
 
+    @Test
+    void updateBookAuthor(){
+        UUID id = UUID.fromString("6846546541651");
+        var bookForUpdate = repository.findById(id).orElse(null);
+
+        UUID idAuthor = UUID.fromString("643b2962-82e0-47fb-a00a-b6436441c3ab");
+        Author maria = authorRepository.findById(idAuthor).orElse(null);
+
+        bookForUpdate.setAuthor(maria);
+
+        repository.save(bookForUpdate);
+    }
+
+    @Test
+    void delete(){
+        UUID id = UUID.fromString("6846546541651");
+        var bookForUpdate = repository.findById(id).orElse(null);
+        repository.deleteById(id);
+    }
+
+    @Test
+    void deleteCascade(){
+        UUID id = UUID.fromString("argfdhgfhtawet");
+        var bookForUpdate = repository.findById(id).orElse(null);
+        repository.deleteById(id);
+    }
 }
