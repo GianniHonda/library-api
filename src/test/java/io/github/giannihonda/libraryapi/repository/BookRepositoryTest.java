@@ -6,6 +6,7 @@ import io.github.giannihonda.libraryapi.model.BookGenre;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -85,5 +86,17 @@ class BookRepositoryTest {
         UUID id = UUID.fromString("argfdhgfhtawet");
         var bookForUpdate = repository.findById(id).orElse(null);
         repository.deleteById(id);
+    }
+
+    @Test
+    @Transactional
+    void searchTestBook(){
+        UUID id = UUID.fromString("dUIHuasdhISUDHSaiduhasiuh");
+        Book book = repository.findById(id).orElse(null);
+        System.out.println("Book:");
+        System.out.println(book.getTitle());
+
+       // System.out.println("Author");
+       // System.out.println(book.getAuthor().getName());
     }
 }
