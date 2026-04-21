@@ -27,8 +27,8 @@ class BookRepositoryTest {
         Book book = new Book();
         book.setIsbn("9887-84874");
         book.setPrice(BigDecimal.valueOf(100));
-        book.setGenre(BookGenre.FICTION);
-        book.setTitle("Third Book");
+        book.setGenre(BookGenre.SCIENCE);
+        book.setTitle("Science");
         book.setPublicationDate(LocalDate.of(1980, 1, 2));
 
         Author author = new Author();
@@ -38,7 +38,7 @@ class BookRepositoryTest {
 
         authorRepository.save(author);
 
-        book.setAuthor(author);
+        //book.setAuthor(author);
 
         repository.save(book);
     }
@@ -150,5 +150,15 @@ class BookRepositoryTest {
     void listByGenrePositionalParamTest(){
         var result = repository.findByGenrePositionalParameters("price", BookGenre.FICTION);
         result.forEach(System.out::println);
+    }
+
+    @Test
+    void deleteByGenreTest(){
+        repository.deleteByGenre(BookGenre.SCIENCE);
+    }
+
+    @Test
+    void updatePublicationDataTest(){
+        repository.updatePublicationDate(LocalDate.of(2000, 1, 1));
     }
 }

@@ -4,8 +4,10 @@ import io.github.giannihonda.libraryapi.model.Author;
 import io.github.giannihonda.libraryapi.model.Book;
 import io.github.giannihonda.libraryapi.model.BookGenre;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -70,4 +72,14 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     // positional parameters
     @Query("select b from Book b where b.genre = ?2 order by ?1")
     List<Book> findByGenrePositionalParameters(String nameProperties, BookGenre bookGenre);
+
+    @Modifying
+    @Transactional
+    @Query(" delete from Book where genre = ?1 ")
+    void deleteByGenre(BookGenre genre);
+
+    @Modifying
+    @Transactional
+    @Query(" update Book set publicationDate = ?1 ")
+    void updatePublicationDate(LocalDate newDate);
 }
