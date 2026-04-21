@@ -115,4 +115,28 @@ class BookRepositoryTest {
         List<Book> list = repository.findByTitleAndPrice(titleSearch, price);
         list.forEach(System.out::println);
     }
+
+    @Test
+    void listBooksWithQueryJPQL(){
+        var result = repository.listAllOrderByTitleAndPrice();
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void listAuthorsOfTheBooks(){
+        var result = repository.listAuthorsOfTheBooks();
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void listNonRepeatedBookTitles(){
+        var result = repository.listDifferentBooksNames();
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void listGenresOfBooksByBrazilianAuthors(){
+        var result = repository.listGenreBrazilianAuthors();
+        result.forEach(System.out::println);
+    }
 }
