@@ -139,4 +139,16 @@ class BookRepositoryTest {
         var result = repository.listGenreBrazilianAuthors();
         result.forEach(System.out::println);
     }
+
+    @Test
+    void listByGenreQueryParamTest(){
+        var result = repository.findByGenre(BookGenre.FICTION, "price");
+        result.forEach(System.out::println);
+    }
+
+    @Test
+    void listByGenrePositionalParamTest(){
+        var result = repository.findByGenrePositionalParameters("price", BookGenre.FICTION);
+        result.forEach(System.out::println);
+    }
 }

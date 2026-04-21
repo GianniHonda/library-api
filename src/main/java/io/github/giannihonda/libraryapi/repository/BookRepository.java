@@ -2,8 +2,10 @@ package io.github.giannihonda.libraryapi.repository;
 
 import io.github.giannihonda.libraryapi.model.Author;
 import io.github.giannihonda.libraryapi.model.Book;
+import io.github.giannihonda.libraryapi.model.BookGenre;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -60,4 +62,12 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
         order by b.genre
 """)
     List<String> listGenreBrazilianAuthors();
+
+    // named parameters
+    @Query("select b from Book b where b.genre = :genre order by :paramOrdering")
+    List<Book> findByGenre( @Param("genre") BookGenre bookGenre, @Param("paramOrdering") String nameProperties);
+
+    // positional parameters
+    @Query("select b from Book b where b.genre = ?2 order by ?1")
+    List<Book> findByGenrePositionalParameters(String nameProperties, BookGenre bookGenre);
 }
