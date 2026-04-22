@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class TransactionService {
@@ -19,6 +20,29 @@ public class TransactionService {
     private AuthorRepository authorRepository;
     @Autowired
     private BookRepository bookRepository;
+
+    /// book (title, ... , name_file) -> id.png
+    @Transactional
+    public void saveBookWithImage(){
+        //save book
+        //repository.save(book);
+
+        //take book id = book.getId();
+        //var id = book.getId();
+
+        //save book photo -> cloud bucket
+        //bucketService.save(book.getPhoto(), id + ".png");
+
+        //update file name saved
+        //book.setFileNamePhoto(id + ".png");
+    }
+
+    @Transactional
+    public void updateWithoutUpdating(){
+        var book = bookRepository.findById(UUID.fromString("sAUYSHaushAUSHaush")).orElse(null);
+
+        book.setPublicationDate(LocalDate.of(2024, 6, 1));
+    }
 
     @Transactional
     public void execute(){
