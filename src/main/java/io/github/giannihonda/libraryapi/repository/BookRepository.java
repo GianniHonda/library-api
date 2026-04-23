@@ -37,11 +37,11 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<Book> findByTitleOrIsbnOrderByTitle(String title, String isbn);
 
     // select * from book where publication_date between ? and ?
-    List<Book> findByPublicationDate(LocalDate start, LocalDate end);
+    List<Book> findByPublicationDateBetween(LocalDate start, LocalDate end);
 
     // JPQL -> reference entities and properties
     // select b.* from book as b order by b.title
-    @Query(" select b from Book as b order by l.title, b.price ")
+    @Query(" select b from Book as b order by b.title, b.price ")
     List<Book> listAllOrderByTitleAndPrice();
 
     /**
@@ -57,8 +57,8 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     List<String> listDifferentBooksNames();
 
     @Query("""
-        select l.genre
-        from book b
+        select b.genre
+        from Book b
         join b.author a
         where a.nationality = 'Brazilian'
         order by b.genre
