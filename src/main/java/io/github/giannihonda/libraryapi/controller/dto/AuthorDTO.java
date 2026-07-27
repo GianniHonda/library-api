@@ -3,8 +3,9 @@ package io.github.giannihonda.libraryapi.controller.dto;
 import io.github.giannihonda.libraryapi.model.Author;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-public record AuthorDTO(String name, LocalDate birthDate, String nationality) {
+public record AuthorDTO(UUID id, String name, LocalDate birthDate, String nationality) {
 
   public Author mappingForAuthor(){
       Author author = new Author();
